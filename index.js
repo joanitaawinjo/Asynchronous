@@ -10,15 +10,19 @@
 // * Inside the Promise, log "Reminder sent to [email]" to the console.
 // * End the function.
 
-async function sendReminder(email) {
-  await new Promise(resolve => setTimeout(resolve, 5000));
-   console.log(`Reminder sent to ${email}`);
+function sendReminder(email) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log(`Reminder sent to ${email}`);
+      resolve();
+    }, 5000);
+  });
 }
-sendReminder('example@gmail.com');
-sendReminder('mary@gmail.com');
-sendReminder('edigah@gmail.com');
-
-
+(async () => {
+  await sendReminder("user1@example.com");
+  await sendReminder("user2@example.com");
+  await sendReminder("user3@example.com");
+})();
 
 // You want to simulate a login system that tries to log in a user. 
 // The first two attempts fail, but the third succeeds. Write a function tryLogin that uses a counter and Promises. 
